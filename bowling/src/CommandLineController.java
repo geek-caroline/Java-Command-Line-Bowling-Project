@@ -13,6 +13,10 @@ public class CommandLineController {
     final String PLAYER_COUNT_ERROR = "Sorry, that is an invalid player count, it must be a number between 1 and 4, e.g. 2";
     StringBuffer gameProgressReport = new StringBuffer();
     Console console;
+
+    String playerNameRequestTemplate = "Please enter the name for player $playerNumber";
+
+
     public CommandLineController(){
         console = System.console();
     }
@@ -20,10 +24,10 @@ public class CommandLineController {
     public int getPlayerCount() {
         int playerCount;
         do {
-            String playerCount = console.readLine("Please enter number of players:");
-            playerCount = this.getValidPlayerCount(playerCount);
+            String playerCountStr = console.readLine("Please enter number of players:");
+            playerCount = this.getValidPlayerCount(playerCountStr);
 
-        } while (!isValidPlayerCount);
+        } while (playerCount != -1);
 
         return 1;
     }
@@ -46,11 +50,24 @@ public class CommandLineController {
         return playerCount;
     }
 
-    public String getPlayerNames(int playerCount) {
+    public String[] getPlayerNames(int playerCount) {
         String[] playerNames = new String[playerCount];
+
         for (int i = 0; i < playerCount; i++) {
-            System.out.println("Please enter the name of player " + Integer.toString(playerNumber);
-            String name = "bob";
-            playerNames[i] = name
+            String playerNameReq = String.format(playerNameRequestTemplate, Integer.toString(i));
+            String name;
+            do {
+                name = console.readLine(playerNameReq);
+            } while (!this.isValidName(name));
+            playerNames[i] = name;
+        }
+        return playerNames;
+    }
+
+    private boolean isValidName(String name) {
+        if(name.length()>10){
+            return false;
+        }
+        return true;
     }
 }

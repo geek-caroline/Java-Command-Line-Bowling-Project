@@ -8,7 +8,7 @@ import java.util.logging.Logger;
  * To change this template use File | Settings | File Templates.
  */
 public class Bowling {
-    private static Logger logger = Logger.getLogger("com.wombat.nose");
+    private static Logger logger = Logger.getLogger("uk.co.geek-caroline.bowling");
     public static void main() {
 
         CommandLineController commandLineController = new CommandLineController();

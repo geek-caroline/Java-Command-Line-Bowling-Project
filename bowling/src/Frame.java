@@ -9,7 +9,7 @@ public class Frame {
     Score score1;
     Score score2;
 
-    private class Score() {
+    private class Score{
 
     }
 }
