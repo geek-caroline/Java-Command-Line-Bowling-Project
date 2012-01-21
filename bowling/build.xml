@@ -1,4 +1,4 @@
-<project name="Bowling" default="dist" basedir=".">
+<project name="Bowling" default="jar" basedir=".">
     <description>
         Build file for bowling project
     </description>
@@ -8,6 +8,7 @@
     <property name="dist"  location="dist"/>
     <property name="projectName" value="Bowling"/>
     <property name="projectVersion" value="0.9"/>
+    <property name="main-class" value="uk.co.geekcaroline.bowling.Bowling"/>
 
     <target name="init">
         <mkdir dir="${build}"/>
@@ -17,16 +18,15 @@
         <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
     </target>
 
-    <target name="dist" depends="compile" description="generate the distributable" >
-        <jar destfile="${projectName}-${projectVersion}.jar" basedir="${build}">
+    <target name="jar" depends="compile" description="generate the distributable" >
+        <jar destfile="${dist}/${projectName}-${projectVersion}.jar" basedir="${build}">
             <manifest>
-                <attribute name="Main-Class" value="Bowling" />
+                <attribute name="Main-Class" value="${main-class}" />
             </manifest>
         </jar>
-        <copy file="${projectName}-${projectVersion}.jar" todir="${dist}/lib/"/>
     </target>
 
-    <target name="run" depends="dist">
+    <target name="run" depends="jar">
         <java jar="${dist}/lib/${projectName}-${projectVersion}.jar" fork="true"/>
     </target>
 

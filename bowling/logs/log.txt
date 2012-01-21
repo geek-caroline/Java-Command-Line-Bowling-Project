@@ -1,0 +1,2 @@
+21-Jan-2012 18:03:05 uk.co.geekcaroline.bowling.Bowling getLogger
+WARNING: My first log
