@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.util.logging.Logger;
 
 /**
@@ -9,9 +10,10 @@ import java.util.logging.Logger;
  */
 public class Bowling {
     private static Logger logger = Logger.getLogger("uk.co.geek-caroline.bowling");
-    public static void main() {
-
-        CommandLineController commandLineController = new CommandLineController();
+    public static void main(String[] args) {
+        Console console = System.console();
+        System.out.println("console is"+console.toString());
+        CommandLineController commandLineController = new CommandLineController(console);
         int playerCount = commandLineController.getPlayerCount();
         Competition competition = new Competition(playerCount);
 

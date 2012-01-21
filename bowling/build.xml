@@ -13,16 +13,21 @@
         <mkdir dir="${build}"/>
     </target>
 
-    <target name="run">
-        <java jar="${dist}/lib/${projectName}-${projectVersion}.jar" fork="true"/>
-    </target>
-
-    <target name="compile" depends="init" description="compile the source " >
+    <target name="compile" depends="init" description="compile the source" >
         <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
     </target>
 
-    <target name="dist" depends="compile" description="generate the distribution" >
-        <jar jarfile="${dist}/lib/${projectName}-${projectVersion}.jar" basedir="${build}"/>
+    <target name="dist" depends="compile" description="generate the distributable" >
+        <jar destfile="${projectName}-${projectVersion}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="Bowling" />
+            </manifest>
+        </jar>
+        <copy file="${projectName}-${projectVersion}.jar" todir="${dist}/lib/"/>
+    </target>
+
+    <target name="run" depends="dist">
+        <java jar="${dist}/lib/${projectName}-${projectVersion}.jar" fork="true"/>
     </target>
 
     <target name="clean" description="clean up" >

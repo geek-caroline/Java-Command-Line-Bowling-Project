@@ -17,8 +17,8 @@ public class CommandLineController {
     String playerNameRequestTemplate = "Please enter the name for player $playerNumber";
 
 
-    public CommandLineController(){
-        console = System.console();
+    public CommandLineController(Console console){
+        this.console = console;
     }
 
     public int getPlayerCount() {
@@ -26,7 +26,7 @@ public class CommandLineController {
         do {
             String playerCountStr = console.readLine("Please enter number of players:");
             playerCount = this.getValidPlayerCount(playerCountStr);
-
+            System.out.println("player cont is"+playerCount);
         } while (playerCount != -1);
 
         return 1;
@@ -37,12 +37,16 @@ public class CommandLineController {
             System.out.println(PLAYER_COUNT_ERROR);
             return -1;
         }
-        int playerCount = -1;
+        Integer playerCount = -1;
         try {
+            System.out.println("got here4"+userInput);
+            //for some reason this isn't returning an integer, it's returning null
             playerCount = Integer.getInteger(userInput);
+            System.out.println("got here5"+playerCount);
         } catch (NumberFormatException nfe) {
-
+            System.out.println("got here6"+ nfe.getMessage());
         }
+        System.out.println("got playerCount is"+playerCount.toString());
         if( playerCount>4 || playerCount<1 ) {
             System.out.println(PLAYER_COUNT_ERROR);
             return -1;
