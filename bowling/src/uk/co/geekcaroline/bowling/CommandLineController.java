@@ -20,8 +20,10 @@ public class CommandLineController {
     final String ENTER_PLAYER_COUNT = "Please enter number of players:";
     final String ENTER_NAME_TEMPLATE = "Please enter the name for player %s";
     final String PLAYER_NAME_WRONG = "Sorry, the name must be less that 10 characters long";
-    final String QUERY_PIN_COUNT = "We are in frame, %s, how many pins has %s knocked over in his/her %s go?";
-
+    final String QUERY_PIN_COUNT = "We are in frame, {0}, how many pins has {1} knocked over in his/her {2} go?";
+    final String INVALID_SCORE_MESSAGE = "Sorry, your score must be between 1 and 10";
+    final String SCORE_SHEET_HEADER = "            Frame number  |   1   ||   2   ||   3   ||   4   ||   5   ||   6   ||   7   ||   8   ||   9   ||  10   |";
+    
     Logger logger;
     
     //Console console;
@@ -105,17 +107,20 @@ public class CommandLineController {
         return true;
     }
     
-    public int getPlayerPins(Integer frameNumber, String name, int attemptNumber) {
+    public int getPlayerPins(int frameNumber, String name, int attemptNumber) {
         String ordinal = "first";
-        if (attemptNumber == 2) {
+        if (attemptNumber == 1) {
             ordinal = "second";
+        } else if (attemptNumber == 2) {
+            ordinal = "extra";
         }
-        MessageFormat mf = new MessageFormat("We are in frame, {0}, how many pins has {1} knocked over in his/her {2} go?");
+        MessageFormat mf = new MessageFormat(QUERY_PIN_COUNT);
         String pinCountStr = "";
         int pinCount = -1;
         do {
 //                name = console.readLine(playerNameReq);
-            String[] tokens =  {frameNumber.toString(), name, ordinal};
+            Integer outputFrameNumber = 1+frameNumber;
+            String[] tokens =  {outputFrameNumber.toString(), name, ordinal};
             System.out.println(mf.format(tokens));
             try {
                 pinCountStr = input.readLine();
@@ -134,9 +139,11 @@ public class CommandLineController {
         try {
             pinCount = Integer.valueOf(pinCountStr);
         } catch (NumberFormatException nfe) {
+            System.out.println(INVALID_SCORE_MESSAGE);
             return -1;
         }
         if (pinCount<0 || pinCount>10) {
+            System.out.println(INVALID_SCORE_MESSAGE);
             return -1;
         }
         return pinCount;
@@ -144,10 +151,9 @@ public class CommandLineController {
 
     public void printScoreSheet(Player[] players) {
         System.out.println("Here are the scores so far:");
-        for(int playerNumber=0; playerNumber<players.length; playerNumber++) {
-            //GOT TO HERE - NEED TO FINISH PRINTER
-            String outString = String.format("%15d", players[playerNumber].name);
-            System.out.print("For player " + outString);
+        System.out.println(SCORE_SHEET_HEADER);
+        for(int i=0; i<players.length; i++) {
+            players[i].printScoreSheet();
         }
 
     }

@@ -24,19 +24,35 @@ public class Competition {
     
     public void start(){
         while(frameCounter>0) {
-            for(int i=0; i<players.length; i++) {
+            for(int playerNumber=0; playerNumber<players.length; playerNumber++) {
                 Integer frameNumber = 10-frameCounter;
-                int pinsCount;
-                for(int attempt=0; attempt<2; attempt++) {
-                    do {
-                        pinsCount = clc.getPlayerPins(frameNumber, players[i].name, attempt);
-                    } while (pinsCount == -1);
-                    players[i].getFrame(frameNumber).setScore(attempt, pinsCount);
+                int pinsCount = 0;
+                Player currentPlayer = players[playerNumber];
+                for(int attemptNumber=0; attemptNumber<2; attemptNumber++) {
+                    pinsCount = clc.getPlayerPins(frameNumber, currentPlayer.name, attemptNumber);
+                    currentPlayer.setFrame(frameNumber, pinsCount);
+                    //in case of a strike we skip the next go (if we're not on the final frame)
+                    if(pinsCount==10 && frameNumber<9){
+                        attemptNumber++;
+                        currentPlayer.setFrame(frameNumber, 0);
+                    }
+                    //update previous scores if last ball was a strike or spare
+                    if(frameNumber>0) {
+                        currentPlayer.updatePreviousScores(frameNumber, pinsCount,  attemptNumber);
+                    }
                 }
-                clc.printScoreSheet(players);
+                //special case of in final round and we're getting close to a perfect game...
+                if(frameNumber == 9 && pinsCount == 10) {
+                    pinsCount = clc.getPlayerPins(frameNumber, currentPlayer.name, 2);
+                }
+                this.printScoreSheet();
             }
             frameCounter--;
         }
+    }
+
+    public void printScoreSheet() {
+        clc.printScoreSheet(players);
     }
 
 }
