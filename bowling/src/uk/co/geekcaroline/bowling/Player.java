@@ -3,11 +3,7 @@ package uk.co.geekcaroline.bowling;
 import java.util.ArrayList;
 
 /**
- * Created by IntelliJ IDEA.
- * User: handleyc
- * Date: 20/01/2012
- * Time: 08:30
- * To change this template use File | Settings | File Templates.
+ * holds a players details and his / her scores
  */
 public class Player {
     String name;

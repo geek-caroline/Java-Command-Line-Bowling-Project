@@ -1,33 +1,26 @@
 package uk.co.geekcaroline.bowling;
 import java.io.*;
-import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
- * Created by IntelliJ IDEA.
- * User: handleyc
- * Date: 20/01/2012
- * Time: 08:27
- * To change this template use File | Settings | File Templates.
- */
+ * Creates the console and gets the player count then initialises the game.
+ * */
 public class Bowling {
-    private static Logger logger;
+    //private static Logger logger;
     //private static Console console;
     private static BufferedReader inputStreamReader;
 
+    //TODO:
+    // - finish implementing logger
+    // - unit tests
+    // - end to end testing
+    // - implement proper javadoc comments
+    // - provide menu of different options, e.g. exit, delete last score etc.
 
     public static void main(String[] args) {
-        //Console console = System.console();
-        inputStreamReader = new BufferedReader(new InputStreamReader(System.in));
+        Console console = System.console();
 
         //logger = getLogger();
-//        CommandLineController commandLineController = new CommandLineController(console);
-
-//        CommandLineController commandLineController = new CommandLineController(inputStreamReader, logger);
-        CommandLineController commandLineController = new CommandLineController(inputStreamReader);
+        CommandLineController commandLineController = new CommandLineController(console);
 
         int playerCount = commandLineController.getPlayerCount();
         assert playerCount>0 : "Player count is below permitted";
@@ -37,14 +30,7 @@ public class Bowling {
         assert playerNames.length == playerCount+1 : "player names array not long enough";
 
         Competition competition = new Competition(playerNames, commandLineController);
-
-        competition.start();
-
-        //make new competition
-        //  -enter player number
-        //  -enter names
-        //  -enter rounds?
-        //  -
+        competition.play();
     }
 
 //    private static Logger getLogger(){
@@ -65,11 +51,4 @@ public class Bowling {
 //        }
 //        return logger;
 //    }
-    //             Bowling
-    //   |             |         |
-    // Competition  Players   Printer
-    //   |
-    //  Frames
-    //   |
-    //  Scores
 }

@@ -1,13 +1,7 @@
 package uk.co.geekcaroline.bowling;
 
-import java.util.ArrayList;
-
 /**
- * Created by IntelliJ IDEA.
- * User: handleyc
- * Date: 20/01/2012
- * Time: 08:29
- * To change this template use File | Settings | File Templates.
+ * Controls the game, prompting for score entries and recording these appropriately
  */
 public class Competition {
     Player[] players;
@@ -21,8 +15,9 @@ public class Competition {
             players[i] = new Player(playerNames[i]);
         }
     }
-    
-    public void start(){
+
+    //TODO: consider splitting this method into more easy to read chunks
+    public void play(){
         while(frameCounter>0) {
             for(int playerNumber=0; playerNumber<players.length; playerNumber++) {
                 Integer frameNumber = 10-frameCounter;

@@ -26,9 +26,14 @@
         </jar>
     </target>
 
-    <target name="run" depends="jar">
-        <java jar="${dist}/lib/${projectName}-${projectVersion}.jar" fork="true"/>
-    </target>
+    <!--TODO: this task does not yet work properly-->
+    <!--<target name="run" depends="jar">-->
+        <!--<assertions>-->
+            <!--<disable/>-->
+            <!--&lt;!&ndash;<enable/>&ndash;&gt;-->
+        <!--</assertions>-->
+        <!--<java jar="${dist}/${projectName}-${projectVersion}.jar" fork="true"/>-->
+    <!--</target>-->
 
     <target name="clean" description="clean up" >
         <delete dir="${build}"/>

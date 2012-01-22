@@ -1,19 +1,10 @@
 package uk.co.geekcaroline.bowling;
 
-import javax.management.QueryEval;
-import java.io.BufferedReader;
 import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.MessageFormat;
-import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
- * User: handleyc
- * Date: 20/01/2012
- * Time: 08:49
- * To change this template use File | Settings | File Templates.
+ * Controls and validates user inputs
  */
 public class CommandLineController {
     final String PLAYER_COUNT_WRONG = "Sorry, that is an invalid player count, it must be a number between 1 and 4, e.g. 2";
@@ -24,34 +15,18 @@ public class CommandLineController {
     final String INVALID_SCORE_MESSAGE = "Sorry, your score must be between 1 and 10";
     final String SCORE_SHEET_HEADER = "            Frame number  |   1   ||   2   ||   3   ||   4   ||   5   ||   6   ||   7   ||   8   ||   9   ||  10   |";
     
-    Logger logger;
-    
-    //Console console;
-    BufferedReader input;
+    Console console;
 
-
-    //public CommandLineController(Console console){
-//    public CommandLineController(BufferedReader input, Logger logger){
-    public CommandLineController(BufferedReader input){
-        //this.console = console;
-        this.input = input;
-        this.logger = logger;
+    public CommandLineController(Console console){
+        this.console = console;
     }
 
     public int getPlayerCount() {
         int playerCount;
         do {
-            //            String playerCountStr = console.readLine(ENTER_PLAYER_COUNT);
-            System.out.println(ENTER_PLAYER_COUNT);
-            String playerCountStr = null;
-            try {
-                playerCountStr = input.readLine();
-            } catch (IOException e) {
-                System.out.println("issues reading"+e.getMessage());
-            }
+            String playerCountStr = console.readLine(ENTER_PLAYER_COUNT);
             playerCount = this.getValidPlayerCount(playerCountStr);
         } while (playerCount == -1);
-
         return playerCount;
     }
 
@@ -62,12 +37,13 @@ public class CommandLineController {
         }
         Integer playerCount = -1;
         try {
-            //for some reason this isn't returning an integer, it's returning null
             playerCount = Integer.valueOf(userInput);
         } catch (NumberFormatException nfe) {
-            logger.warning(
-                    "An exception has occured that should not be possible due to checks, userInput was: " + userInput
-                    + ", printing stack trace:" + nfe.getStackTrace());
+            System.out.println("An impossible exception has occured, sorry the program will now have to exit");
+            System.exit(-1);
+//            logger.warning(
+//                    "An exception has occured that should not be possible due to checks, userInput was: " + userInput
+//                    + ", printing stack trace:" + nfe.getStackTrace());
         }
         if( playerCount>4 || playerCount<1 ) {
             System.out.println(PLAYER_COUNT_WRONG);
@@ -83,13 +59,7 @@ public class CommandLineController {
             String playerNameReq = String.format(ENTER_NAME_TEMPLATE, Integer.toString(i+1));
             String name = null;
             do {
-//                name = console.readLine(playerNameReq);
-                System.out.println(playerNameReq);
-                try {
-                    name = input.readLine();
-                } catch (IOException e) {
-                    System.out.println("issues reading"+e.getMessage());
-                }
+                name = console.readLine(playerNameReq);
             } while (!this.isValidName(name));
             assert name.length() > 0 : "name length is too short";
             assert name.length() < 11 : "name length is too long";
@@ -118,16 +88,11 @@ public class CommandLineController {
         String pinCountStr = "";
         int pinCount = -1;
         do {
-//                name = console.readLine(playerNameReq);
+            //todo: clean up this number / string hack
             Integer outputFrameNumber = 1+frameNumber;
             String[] tokens =  {outputFrameNumber.toString(), name, ordinal};
-            System.out.println(mf.format(tokens));
-            try {
-                pinCountStr = input.readLine();
-                pinCount = this.isValidPinCount(pinCountStr);
-            } catch (IOException e) {
-                System.out.println("issues reading"+e.getMessage());
-            }
+            pinCountStr = console.readLine(mf.format(tokens));
+            pinCount = this.isValidPinCount(pinCountStr);
         } while (pinCount == -1);
         assert pinCount >= 0 : "pin count is less than 1";
         assert pinCount <= 10 : "pin count is greater than 10";

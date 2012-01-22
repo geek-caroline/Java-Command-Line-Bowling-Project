@@ -1,11 +1,7 @@
 package uk.co.geekcaroline.bowling;
 
 /**
- * Created by IntelliJ IDEA.
- * User: CJ
- * Date: 21/01/12
- * Time: 18:53
- * To change this template use File | Settings | File Templates.
+ * Records the score for this frame
  */
 public class Frame {
     int score1;
@@ -25,9 +21,6 @@ public class Frame {
         if(score1 + score2 == 10) {
             this.isAspare = true;
         }
-    }
-    public void setExtraBall(int pinCount) {
-        score3 = pinCount;
     }
     public void updateScoresForStrike(int pinCount, int attemptNumber) {
         if(attemptNumber==1 && pinCount == 10) {
@@ -61,7 +54,7 @@ public class Frame {
         if(isAstrike) {
             System.out.print("|   x   |");
         } else {
-            System.out.print(String.format("%2s", "| "+this.getScore(1)));
+            System.out.print(String.format("%3s", "|  "+this.getScore(1)));
             System.out.print("|");
             if(isAspare()) {
                 System.out.print("/  |");
