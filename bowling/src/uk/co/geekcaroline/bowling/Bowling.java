@@ -8,6 +8,8 @@ public class Bowling {
     //private static Logger logger;
     //private static Console console;
     private static BufferedReader inputStreamReader;
+    private static InputDevice inputDevice;
+
 
     //TODO:
     // - finish implementing logger
@@ -17,10 +19,11 @@ public class Bowling {
     // - provide menu of different options, e.g. exit, delete last score etc.
 
     public static void main(String[] args) {
-        Console console = System.console();
+
+        inputDevice = InputDevice.getDefaultTextDevice();
 
         //logger = getLogger();
-        CommandLineController commandLineController = new CommandLineController(console);
+        CommandLineController commandLineController = new CommandLineController(inputDevice);
 
         int playerCount = commandLineController.getPlayerCount();
         assert playerCount>0 : "Player count is below permitted";

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>uk.co.geekcaroline.bowling</OriginalElement>
+  <nodes>
+    <node x="-15.512630014858928" y="-187.9554234769688">uk.co.geekcaroline.bowling.Bowling</node>
+    <node x="-345.4264487369985" y="349.56017830609215">uk.co.geekcaroline.bowling.Frame</node>
+    <node x="-323.1017211490837" y="-100.63595839524513">uk.co.geekcaroline.bowling.Competition</node>
+    <node x="219.5943536404161" y="-88.65527488855872">uk.co.geekcaroline.bowling.CommandLineController</node>
+    <node x="-362.9361069836553" y="110.09361069836558">uk.co.geekcaroline.bowling.Player</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="uk.co.geekcaroline.bowling.Bowling" target="uk.co.geekcaroline.bowling.Competition">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="uk.co.geekcaroline.bowling.Bowling" target="uk.co.geekcaroline.bowling.CommandLineController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="uk.co.geekcaroline.bowling.Competition" target="uk.co.geekcaroline.bowling.CommandLineController">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="uk.co.geekcaroline.bowling.Competition" target="uk.co.geekcaroline.bowling.Player">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="uk.co.geekcaroline.bowling.Player" target="uk.co.geekcaroline.bowling.Frame">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7494432071269488" x="178.51708766716195" y="223.0" />
+  <SelectedNodes>
+    <node>uk.co.geekcaroline.bowling.Frame</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,6 +1,5 @@
 package uk.co.geekcaroline.bowling;
 
-import java.io.Console;
 import java.text.MessageFormat;
 
 /**
@@ -15,16 +14,16 @@ public class CommandLineController {
     final String INVALID_SCORE_MESSAGE = "Sorry, your score must be between 1 and 10";
     final String SCORE_SHEET_HEADER = "            Frame number  |   1   ||   2   ||   3   ||   4   ||   5   ||   6   ||   7   ||   8   ||   9   ||  10   |";
     
-    Console console;
+    InputDevice inputDevice;
 
-    public CommandLineController(Console console){
-        this.console = console;
+    public CommandLineController(InputDevice inputDevice){
+        this.inputDevice = inputDevice;
     }
 
     public int getPlayerCount() {
         int playerCount;
         do {
-            String playerCountStr = console.readLine(ENTER_PLAYER_COUNT);
+            String playerCountStr = inputDevice.writeCommandThenReadLine(ENTER_PLAYER_COUNT);
             playerCount = this.getValidPlayerCount(playerCountStr);
         } while (playerCount == -1);
         return playerCount;
@@ -59,7 +58,7 @@ public class CommandLineController {
             String playerNameReq = String.format(ENTER_NAME_TEMPLATE, Integer.toString(i+1));
             String name = null;
             do {
-                name = console.readLine(playerNameReq);
+                name = inputDevice.writeCommandThenReadLine(playerNameReq);
             } while (!this.isValidName(name));
             assert name.length() > 0 : "name length is too short";
             assert name.length() < 11 : "name length is too long";
@@ -91,7 +90,7 @@ public class CommandLineController {
             //todo: clean up this number / string hack
             Integer outputFrameNumber = 1+frameNumber;
             String[] tokens =  {outputFrameNumber.toString(), name, ordinal};
-            pinCountStr = console.readLine(mf.format(tokens));
+            pinCountStr = inputDevice.writeCommandThenReadLine(mf.format(tokens));
             pinCount = this.isValidPinCount(pinCountStr);
         } while (pinCount == -1);
         assert pinCount >= 0 : "pin count is less than 1";
