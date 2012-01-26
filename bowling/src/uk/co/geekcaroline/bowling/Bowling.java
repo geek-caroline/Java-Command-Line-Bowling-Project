@@ -27,6 +27,7 @@ public class Bowling {
         CommandLineController commandLineController = new CommandLineController(inputDevice);
 
         int playerCount = commandLineController.getPlayerCount();
+
         assert playerCount>0 : "Player count is below permitted";
         assert playerCount<5 : "Player count is above permitted";
 

@@ -37,7 +37,8 @@ public class InputDevice {
     }
 
     public String writeCommandThenReadLine(String msg){
-        this.writer().write(msg);
+        this.writer.write(msg);
+        this.writer.flush();
         try{
             return this.reader.readLine();
         } catch (IOException ioe) {

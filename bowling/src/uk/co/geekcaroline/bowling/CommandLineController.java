@@ -8,7 +8,7 @@ import java.text.MessageFormat;
 public class CommandLineController {
     final String PLAYER_COUNT_WRONG = "Sorry, that is an invalid player count, it must be a number between 1 and 4, e.g. 2";
     final String ENTER_PLAYER_COUNT = "Please enter number of players:";
-    final String ENTER_NAME_TEMPLATE = "Please enter the name for player %s";
+    final String ENTER_NAME_TEMPLATE = "Please enter the name for player %s:";
     final String PLAYER_NAME_WRONG = "Sorry, the name must be less that 10 characters long";
     final String QUERY_PIN_COUNT = "We are in frame, {0}, how many pins has {1} knocked over in his/her {2} go?";
     final String INVALID_SCORE_MESSAGE = "Sorry, your score must be between 1 and 10";
