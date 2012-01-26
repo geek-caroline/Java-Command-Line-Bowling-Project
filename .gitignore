@@ -1,3 +1,4 @@
 #ignore intellij / editor created files
 *.iml
 *.idea
+out/*
