@@ -84,20 +84,20 @@ public class CommandLineController {
             ordinal = "extra";
         }
         MessageFormat mf = new MessageFormat(QUERY_PIN_COUNT);
-        String pinCountStr = "";
-        int pinCount = -1;
+        //todo: clean up this number / string hack
+        Integer outputFrameNumber = 1+frameNumber;
+        String[] tokens =  {outputFrameNumber.toString(), name, ordinal};
+        String msg = mf.format(tokens);
+        int pinCount;
         do {
-            //todo: clean up this number / string hack
-            Integer outputFrameNumber = 1+frameNumber;
-            String[] tokens =  {outputFrameNumber.toString(), name, ordinal};
-            pinCountStr = inputDevice.writeCommandThenReadLine(mf.format(tokens));
-            pinCount = this.isValidPinCount(pinCountStr);
+            pinCount = this.isValidPinCount(inputDevice.writeCommandThenReadLine(msg));
         } while (pinCount == -1);
         assert pinCount >= 0 : "pin count is less than 1";
         assert pinCount <= 10 : "pin count is greater than 10";
         return pinCount;
     }
-    
+
+
     private int isValidPinCount(String pinCountStr) {
         int pinCount;
         try {

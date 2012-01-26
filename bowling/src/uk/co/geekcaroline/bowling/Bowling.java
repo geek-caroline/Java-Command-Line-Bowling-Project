@@ -15,6 +15,7 @@ public class Bowling {
     // - finish implementing logger
     // - unit tests
     // - end to end testing
+    // - alter methods to being package protected to enable further unit testing
     // - implement proper javadoc comments
     // - provide menu of different options, e.g. exit, delete last score etc.
 
